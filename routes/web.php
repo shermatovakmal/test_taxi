@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders.list');
+Route::post('/orders/assign', [OrdersController::class, 'assignDriver'])->name('orders.assignDrv');
