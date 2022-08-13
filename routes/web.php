@@ -19,4 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/orders', [OrdersController::class, 'index'])->name('orders.list');
+Route::get('/orders/ongoing', [OrdersController::class, 'ongoingOrders'])->name('orders.ongoing');
+Route::get('/orders/delivered', [OrdersController::class, 'deliveredOrders'])->name('orders.delivered');
+
 Route::post('/orders/assign', [OrdersController::class, 'assignDriver'])->name('orders.assignDrv');
+Route::post('/orders/deliver', [OrdersController::class, 'deliverOrder'])->name('orders.deliverOrder');
