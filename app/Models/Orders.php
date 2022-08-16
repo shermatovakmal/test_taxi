@@ -13,6 +13,11 @@ class Orders extends Model
      */
     private $commission = 0.1;
 
+    protected $fillable = [
+        'phone',
+        'amount',
+    ];
+
     public function getOrdersByStatus($statusArr)
     {
         $sql = "SELECT o.id, o.created_at, CONCAT_WS(', ', rt.latitude_start, rt.longitude_start) start_location,

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class Drivers extends Model
 {
+    protected $fillable = [
+        'name_first',
+    ];
+
     public function getAssignedDriverByOrderStatus($statusArr)
     {
         $resp = array();
