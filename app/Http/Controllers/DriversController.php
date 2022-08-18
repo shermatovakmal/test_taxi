@@ -10,6 +10,61 @@ use Illuminate\Support\Facades\Validator;
 
 class DriversController extends Controller
 {
+    /**
+     * @OA\Post(
+     * path="/api/driver",
+     * operationId="driver",
+     * tags={"Driver add"},
+     * summary="driver add",
+     * description="Driver add",
+     *     security={{"bearer_token":{}}},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"name_first"},
+     *               @OA\Property(property="name_first", type="text"),
+     *               @OA\Property(property="name_last", type="text"),
+     *               @OA\Property(property="name_additional", type="text"),
+     *               @OA\Property(property="phone", type="text"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="last_status", type="text"),
+     *               @OA\Property(property="last_balance", type="number"),
+     *               @OA\Property(property="rating", type="number"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Driver created succesfully",
+     *          content={
+     *             @OA\MediaType(
+     *                 mediaType="application/json",
+     *                 @OA\Schema(
+     *                     @OA\Property(
+     *                         property="success",
+     *                         type="boolean",
+     *                         description="true|false",
+     *                          example="true"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="message",
+     *                         type="string",
+     *                         description="Driver created succesfully"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="driver_id",
+     *                         type="int",
+     *                         description="Driver id"
+     *                     )
+     *                 )
+     *             )
+     *         }
+     *       )
+     * )
+     */
     public function createDriverJson(Request $request)
     {
         $input = $request->only(['name_first', 'name_last', 'name_additional', 'phone', 'email', 'last_status', 'last_balance', 'rating']);
@@ -45,7 +100,7 @@ class DriversController extends Controller
                 'data'=>array(
                     'success' => true,
                     'message' => 'Driver created succesfully',
-                    'order_id' => $driverObj->id
+                    'driver_id' => $driverObj->id
                 ),
                 'status' => 200);
 

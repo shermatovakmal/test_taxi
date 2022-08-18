@@ -82,6 +82,60 @@ class OrdersController extends Controller
         return view('orders.list_delivered', $resp);
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/order",
+     * operationId="order",
+     * tags={"Order add"},
+     * summary="order add",
+     * description="Order add",
+     *     security={{"bearer_token":{}}},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"phone", "amount", "latitude_start", "longitude_start", "latitude_end", "longitude_end"},
+     *               @OA\Property(property="phone", type="text"),
+     *               @OA\Property(property="amount", type="number"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="latitude_start", type="number"),
+     *               @OA\Property(property="longitude_start", type="number"),
+     *               @OA\Property(property="latitude_end", type="number"),
+     *               @OA\Property(property="longitude_end", type="number"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Order created and routes added succesfully",
+     *          content={
+     *             @OA\MediaType(
+     *                 mediaType="application/json",
+     *                 @OA\Schema(
+     *                     @OA\Property(
+     *                         property="success",
+     *                         type="boolean",
+     *                         description="true|false",
+     *                          example="true"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="message",
+     *                         type="string",
+     *                         description="Order created and routes added succesfully"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="order_id",
+     *                         type="int",
+     *                         description="Order id"
+     *                     )
+     *                 )
+     *             )
+     *         }
+     *       )
+     * )
+     */
     public function createOrderJson(Request $request)
     {
         $input = $request->only(['phone', 'amount', 'email', 'latitude_start', 'longitude_start', 'latitude_end', 'longitude_end']);
@@ -143,6 +197,59 @@ class OrdersController extends Controller
         return response()->json($resp['data'], $resp['status']);
     }
 
+    /**
+     * @OA\Patch(
+     * path="/api/order-assign2driver",
+     * operationId="order-assign2driver",
+     * tags={"order-assign2driver"},
+     * summary="order-assign2driver",
+     * description="order-assign2driver",
+     *     security={{"bearer_token":{}}},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application/x-www-form-urlencoded",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="number"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Order assigned to driver",
+     *          content={
+     *             @OA\MediaType(
+     *                 mediaType="application/json",
+     *                 @OA\Schema(
+     *                     @OA\Property(
+     *                         property="success",
+     *                         type="boolean",
+     *                         description="true|false",
+     *                          example="true"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="message",
+     *                         type="string",
+     *                         description="Success"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="order_id",
+     *                         type="int",
+     *                         description="Order id"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="driver_id",
+     *                         type="int",
+     *                         description="Driver id"
+     *                     )
+     *                 )
+     *             )
+     *         }
+     *       )
+     * )
+     */
     public function assignDriverJson(Request $request)
     {
         $input = $request->only(['id']);

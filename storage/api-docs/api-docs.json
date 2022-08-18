@@ -6,6 +6,240 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/driver": {
+            "post": {
+                "tags": [
+                    "Driver add"
+                ],
+                "summary": "driver add",
+                "description": "Driver add",
+                "operationId": "driver",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name_first"
+                                ],
+                                "properties": {
+                                    "name_first": {
+                                        "type": "text"
+                                    },
+                                    "name_last": {
+                                        "type": "text"
+                                    },
+                                    "name_additional": {
+                                        "type": "text"
+                                    },
+                                    "phone": {
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "last_status": {
+                                        "type": "text"
+                                    },
+                                    "last_balance": {
+                                        "type": "number"
+                                    },
+                                    "rating": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Driver created succesfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "true|false",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "description": "Driver created succesfully",
+                                            "type": "string"
+                                        },
+                                        "driver_id": {
+                                            "description": "Driver id",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/order": {
+            "post": {
+                "tags": [
+                    "Order add"
+                ],
+                "summary": "order add",
+                "description": "Order add",
+                "operationId": "order",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "phone",
+                                    "amount",
+                                    "latitude_start",
+                                    "longitude_start",
+                                    "latitude_end",
+                                    "longitude_end"
+                                ],
+                                "properties": {
+                                    "phone": {
+                                        "type": "text"
+                                    },
+                                    "amount": {
+                                        "type": "number"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "latitude_start": {
+                                        "type": "number"
+                                    },
+                                    "longitude_start": {
+                                        "type": "number"
+                                    },
+                                    "latitude_end": {
+                                        "type": "number"
+                                    },
+                                    "longitude_end": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order created and routes added succesfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "true|false",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "description": "Order created and routes added succesfully",
+                                            "type": "string"
+                                        },
+                                        "order_id": {
+                                            "description": "Order id",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/order-assign2driver": {
+            "patch": {
+                "tags": [
+                    "order-assign2driver"
+                ],
+                "summary": "order-assign2driver",
+                "description": "order-assign2driver",
+                "operationId": "order-assign2driver",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order assigned to driver",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "true|false",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "description": "Success",
+                                            "type": "string"
+                                        },
+                                        "order_id": {
+                                            "description": "Order id",
+                                            "type": "integer"
+                                        },
+                                        "driver_id": {
+                                            "description": "Driver id",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
